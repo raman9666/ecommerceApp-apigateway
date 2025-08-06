@@ -17,8 +17,23 @@ spring:
             - Path=/users/**
       
 eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: localhost
+    health-check-url-path: /actuator/health
   client:
     register-with-eureka: true
     fetch-registry: true
+    healthcheck:
+      enabled: true
     service-url:
       defaultZone: http://localhost:8761/eureka/
+      
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
